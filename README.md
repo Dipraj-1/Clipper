@@ -1,5 +1,3 @@
-# NoNitroClips — Vencord User Plugin
-
 > **Record rolling audio/video clips from any Discord voice channel — no Nitro required.**
 
 ---
@@ -22,22 +20,6 @@
 
 ---
 
-## 📁 Installation
-
-1. Locate your Vencord `src/userplugins/` directory.
-   - Usually `<repo>/src/userplugins/`
-2. Create the folder `NoNitroClips/` inside it.
-3. Copy **`index.tsx`** (and optionally `ipc.tsx`) into that folder.
-4. Rebuild Vencord:
-   ```bash
-   pnpm build          # or: node scripts/build.mjs
-   ```
-5. Open Discord → **Settings → Vencord → Plugins** → enable **NoNitroClips**.
-
-> **No `package.json` needed** — Vencord's build system handles TypeScript compilation automatically.
-
----
-
 ## ⚙️ Settings
 
 Open **Discord Settings → Vencord → Plugins → NoNitroClips → ⚙️**
@@ -52,20 +34,6 @@ Open **Discord Settings → Vencord → Plugins → NoNitroClips → ⚙️**
 | Audio only | ❌ | Skip video when not streaming |
 | Output format | WebM | WebM (recommended) or MP4 |
 | Show toasts | ✅ | Desktop notification on save |
-
----
-
-## 🎹 Hotkey Format
-
-Use `+`-separated modifier names.  Examples:
-
-```
-Alt+C          ← default
-Ctrl+Shift+S
-Meta+Shift+R   ← Cmd+Shift+R on macOS
-```
-
-Recognised modifiers: `Alt`, `Ctrl` / `Control`, `Shift`, `Meta` / `Cmd` / `Super`
 
 ---
 
@@ -124,22 +92,6 @@ Both patches are marked `noWarn: true` — they are no-ops if Discord hasn't shi
 | **Loopback audio** | Discord's output (other people's voices) requires system audio capture. If `getDisplayMedia` isn't available, only your microphone is recorded. |
 | **Buffer on startup** | There's a 0–2 second gap after joining a channel before the first chunks arrive. |
 | **Video quality** | Capped at 4 Mbps by default. Raise `videoBitsPerSecond` in `index.tsx` for higher quality (uses more RAM). |
-
----
-
-## 🛠️ Customisation Tips
-
-**Increase video bitrate** (line ~100 of `index.tsx`):
-```ts
-videoBitsPerSecond: 8_000_000,   // 8 Mbps
-```
-
-**Add more clip-length options**:
-```ts
-{ label: "5 minutes", value: 300 },
-```
-
-**Custom notification sound** — hook into `showNotification`'s `onClick` to play an `AudioContext` beep.
 
 ---
 
